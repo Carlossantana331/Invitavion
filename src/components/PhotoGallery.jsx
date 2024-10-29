@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import UploadForm from './UploadForm'; // Asegúrate de importar UploadForm
 
 function PhotoGallery() {
   const [photos, setPhotos] = useState([]);
-  
 
   useEffect(() => {
     const fetchPhotos = async () => {
@@ -20,8 +20,14 @@ function PhotoGallery() {
     fetchPhotos();
   }, []);
 
+  // Función para actualizar las fotos después de subir
+  const handleUpload = (newPhoto) => {
+    setPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
+  };
+
   return (
     <div className="photo-gallery">
+      <UploadForm onUpload={handleUpload} />
       {photos.map((photo) => (
         <div key={photo.id} className="photo-item">
           <img src={photo.thumbnailLink} alt={photo.name} />

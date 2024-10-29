@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const FOLDER_ID = '1Plj_X7zH_HOnxv7R9qtjVGbYN_9waVxZ';
 
-const UploadForm = () => {
+const UploadForm = ({ onUpload }) => {
   const [guestName, setGuestName] = useState('');
   const [file, setFile] = useState(null);
 
@@ -27,6 +27,9 @@ const UploadForm = () => {
     });
     const result = await response.json();
     console.log('Archivo subido', result);
+    
+    // Llama a onUpload después de subir
+    if (onUpload) onUpload(result);
   };
 
   return (
