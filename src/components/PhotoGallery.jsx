@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import UploadForm from './UploadForm'; // Asegúrate de importar UploadForm
+import UploadForm from './UploadForm'; // Asegúrate de importar el componente
 
 function PhotoGallery() {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await fetch(
-          `https://www.googleapis.com/drive/v3/files?q='1Plj_X7zH_HOnxv7R9qtjVGbYN_9waVxZ'+in+parents&fields=files(id,name,webContentLink,thumbnailLink)&key=AIzaSyB05y22BnF5s6jKrSFkSqgDrj_Tlw2jsQY`
-        );
-        const data = await response.json();
-        setPhotos(data.files);
-      } catch (error) {
-        console.error("Error fetching photos:", error);
-      }
-    };
-
     fetchPhotos();
   }, []);
 
-  // Función para actualizar las fotos después de subir
-  const handleUpload = (newPhoto) => {
-    setPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
+  const fetchPhotos = async () => {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/drive/v3/files?q='1Plj_X7zH_HOnxv7R9qtjVGbYN_9waVxZ'+in+parents&fields=files(id,name,webContentLink,thumbnailLink)&key=AIzaSyB05y22BnF5s6jKrSFkSqgDrj_Tlw2jsQY`
+      );
+      const data = await response.json();
+      setPhotos(data.files);
+    } catch (error) {
+      console.error("Error fetching photos:", error);
+    }
   };
 
   return (
     <div className="photo-gallery">
-      <UploadForm onUpload={handleUpload} />
+      <UploadForm onUpload={fetchPhotos} /> {/* Pasar fetchPhotos como onUpload */}
       {photos.map((photo) => (
         <div key={photo.id} className="photo-item">
           <img src={photo.thumbnailLink} alt={photo.name} />

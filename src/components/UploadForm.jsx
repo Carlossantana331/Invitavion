@@ -27,9 +27,9 @@ const UploadForm = ({ onUpload }) => {
     });
     const result = await response.json();
     console.log('Archivo subido', result);
-    
-    // Llama a onUpload después de subir
-    if (onUpload) onUpload(result);
+
+    // Llama a la función onUpload después de la carga exitosa
+    if (onUpload) onUpload();
   };
 
   return (
