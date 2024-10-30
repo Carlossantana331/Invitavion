@@ -33,7 +33,9 @@ function PhotoGallery() {
         <div key={item.id} className="media-item">
           {item.mimeType.startsWith('video/') ? (
             // Si es un video, muestra un elemento de video
-            <video src={getVideoUrl(item.id)} controls />
+            <iframe src={getVideoUrl(item.id)} width="640" height="480" allow="autoplay">
+              Tu navegador no soporta la etiqueta de video.
+            </iframe>
           ) : (
             // Si es una imagen, muestra una etiqueta de imagen
             <img src={item.thumbnailLink} alt={item.name} />
