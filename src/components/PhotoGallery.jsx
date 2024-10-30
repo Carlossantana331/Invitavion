@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import UploadForm from './UploadForm'; // Asegúrate de importar el componente
+import UploadForm from './UploadForm'; // Asegúrate de que la ruta sea correcta
 
 function PhotoGallery() {
   const [photos, setPhotos] = useState([]);
@@ -22,7 +22,7 @@ function PhotoGallery() {
 
   return (
     <div className="photo-gallery">
-      <UploadForm onUpload={fetchPhotos} /> {/* Pasar fetchPhotos como onUpload */}
+      <UploadForm onUpload={fetchPhotos} /> {/* Pasa la función para actualizar fotos */}
       {photos.map((photo) => (
         <div key={photo.id} className="photo-item">
           <img src={photo.thumbnailLink} alt={photo.name} />
